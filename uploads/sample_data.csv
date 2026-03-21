@@ -1,0 +1,16 @@
+Date,Product,Category,Region,Units_Sold,Unit_Price,Revenue
+2025-01-02,Laptop,Electronics,North,5,700,3500
+2025-01-03,Smartphone,Electronics,South,8,500,4000
+2025-01-04,Headphones,Electronics,West,15,50,750
+2025-01-05,Tablet,Electronics,East,6,300,1800
+2025-01-06,Printer,Electronics,North,3,200,600
+2025-01-07,Desk Chair,Furniture,South,4,120,480
+2025-01-08,Office Desk,Furniture,West,2,350,700
+2025-01-09,Notebook,Stationery,East,40,5,200
+2025-01-10,Pen Pack,Stationery,North,25,3,75
+2025-01-11,Monitor,Electronics,South,7,250,1750
+2025-01-12,Keyboard,Electronics,West,10,40,400
+2025-01-13,Mouse,Electronics,East,12,25,300
+2025-01-14,Water Bottle,Accessories,North,20,10,200
+2025-01-15,Backpack,Accessories,South,9,45,405
+2025-01-16,Desk Lamp,Furniture,West,6,35,210
