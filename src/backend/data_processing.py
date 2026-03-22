@@ -1,31 +1,42 @@
 import pandas as pd
 
+REQUIRED_COLUMNS = ["Date", "Product", "Region", "Units", "Price"]
+
 def process_sales_data(file):
 
     df = pd.read_csv(file)
 
-    # Handle different column names
-    if "Units_Sold" in df.columns:
-        df.rename(columns={"Units_Sold": "Units"}, inplace=True)
+    df.columns = [col.strip() for col in df.columns]
 
-    if "Unit_Price" in df.columns:
-        df.rename(columns={"Unit_Price": "Price"}, inplace=True)
+    rename_map = {
+        "Units_Sold": "Units",
+        "Unit_Price": "Price"
+    }
 
+    df.rename(columns=rename_map, inplace=True)
+
+    missing = [col for col in REQUIRED_COLUMNS if col not in df.columns]
+
+    if missing:
+        raise ValueError(f"Dataset missing required columns: {missing}")
+    
     df["Revenue"] = df["Units"] * df["Price"]
 
     total_revenue = df["Revenue"].sum()
 
-    top_product = df.groupby("Product")["Revenue"].sum().idxmax()
-
-    top_region = df.groupby("Region")["Revenue"].sum().idxmax()
-
-    avg_order_value = df["Revenue"].mean()
+    revenue_by_product = df.groupby("Product")["Revenue"].sum()
+    revenue_by_region = df.groupby("Region")["Revenue"].sum()
 
     summary = {
-        "total_revenue": float(total_revenue),
-        "top_product": top_product,
-        "top_region": top_region,
-        "average_order_value": float(avg_order_value)
+        "total_revenue": total_revenue,
+
+        "top_product": revenue_by_product.idxmax(),
+        "least_product": revenue_by_product.idxmin(),
+
+        "top_region": revenue_by_region.idxmax(),
+        "least_region": revenue_by_region.idxmin(),
+
+        "average_order_value": df["Revenue"].mean()
     }
 
     return summary
