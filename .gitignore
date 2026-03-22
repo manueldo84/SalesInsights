@@ -8,6 +8,7 @@ temp_*.csv
 
 # Uploaded datasets
 uploads/
+outputs/
 
 # OS files
 .DS_Store

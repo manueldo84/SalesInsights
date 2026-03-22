@@ -7,19 +7,19 @@ def analyze_sales(file):
 
     response = requests.post(
         API_URL,
-        files={"file": open(file.name, "rb")}
+        files={"file": (file.name, open(file.name, "rb"))}
     )
 
     result = response.json()
 
-    return result["insights"]
+    return result["ai_report"]
 
 interface = gr.Interface(
     fn=analyze_sales,
     inputs=gr.File(label="Upload Sales CSV"),
-    outputs=gr.Textbox(label="AI Generated Insights"),
+    outputs=gr.Textbox(label="AI Generated Business Report"),
     title="AI Sales Report Interpreter",
-    description="Upload a sales dataset and generate business insights automatically."
+    description="Upload a sales dataset and generate AI-powered business insights."
 )
 
 interface.launch()

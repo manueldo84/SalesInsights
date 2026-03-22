@@ -29,15 +29,15 @@ def process_sales_data(file):
     revenue_by_region = df.groupby("Region")["Revenue"].sum()
 
     summary = {
-        "total_revenue": total_revenue,
+    "total_revenue": float(total_revenue),
 
-        "top_product": revenue_by_product.idxmax(),
-        "least_product": revenue_by_product.idxmin(),
+    "top_product": str(revenue_by_product.idxmax()),
+    "least_product": str(revenue_by_product.idxmin()),
 
-        "top_region": revenue_by_region.idxmax(),
-        "least_region": revenue_by_region.idxmin(),
+    "top_region": str(revenue_by_region.idxmax()),
+    "least_region": str(revenue_by_region.idxmin()),
 
-        "average_order_value": df["Revenue"].mean()
+    "average_order_value": float(df["Revenue"].mean())
     }
 
     # Generate Visualizations
