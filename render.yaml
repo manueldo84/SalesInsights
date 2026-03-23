@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: salesreport-backend
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn src.backend.api:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHONPATH
+        value: .
+      - key: GROQ_API_KEY
+        sync: false
+      - key: BACKEND_URL
+        sync: false
+
+  - type: web
+    name: salesreport-frontend
+    runtime: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: streamlit run src/frontend/dashboard.py --server.port $PORT --server.address 0.0.0.0
+    envVars:
+      - key: PYTHONPATH
+        value: .
+      - key: BACKEND_URL
+        sync: false
